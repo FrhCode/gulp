@@ -1,0 +1,5 @@
+# ignore main.css
+/public/css/main.css
+
+# ignore gulpfile.js
+/gulpfile.js
