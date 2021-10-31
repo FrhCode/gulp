@@ -12,6 +12,9 @@ const path = {
     htmlSrc: "./src/**/*.html",
     htmlDest: "./public/",
 
+    staticSrc: "./src/static/**/*.*",
+    staticdest: "./public/static/",
+
     scssSrc: "./src/scss/main.scss",
     scssDest: "./public/css/",
 
@@ -28,6 +31,13 @@ function copyHTML() {
 
     return src(htmlSrc)
         .pipe(dest(htmlDest));
+}
+
+function copyStaticFile() {
+    const { staticSrc, staticdest } = path;
+
+    return src(staticSrc)
+        .pipe(dest(staticdest));
 }
 
 function buildStyle() {
@@ -73,6 +83,7 @@ function watchChange() {
 exports.default =
     series(
         copyHTML,
+        copyStaticFile,
         buildStyle,
         buildJs,
         parallel(watchChange, browserSyncConfig)
